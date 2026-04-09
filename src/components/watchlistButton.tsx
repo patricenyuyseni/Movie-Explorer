@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { WatchlistContext } from "../../context/WatchlistContext";
-import { Movie } from "../../types/Movie";
+import { WatchlistContext } from "../context/watchlistcontext";
+import type { Movie } from "../type/movie";
 
 export default function WatchlistButton({ movie }: { movie: Movie }) {
   const { watchlist, setWatchlist } = useContext(WatchlistContext);

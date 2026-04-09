@@ -1,4 +1,4 @@
-import { Movie } from "../../types/Movie";
+import type { Movie } from "../type/movie";
 import MovieCard from "./MovieCard";
 
 export default function MovieGrid({ movies }: { movies: Movie[] }) {

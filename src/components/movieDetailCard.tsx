@@ -2,7 +2,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getMovieDetails } from "../services/api";
-import { Movie } from "../types/Movie";
+import type { Movie } from "../type/movie";
 import { motion } from "framer-motion";
 
 export default function MovieDetail() {

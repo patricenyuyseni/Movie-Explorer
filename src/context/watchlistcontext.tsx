@@ -1,6 +1,6 @@
 // src/context/WatchlistContext.tsx
 import { createContext, useState, useEffect } from "react";
-import { Movie } from "../types/Movie";
+import type { Movie } from "../type/movie";
 
 export const WatchlistContext = createContext<any>(null);
 

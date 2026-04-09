@@ -1,5 +1,5 @@
 // src/components/movie/MovieCard.tsx
-import { Movie } from "../../types/Movie";
+import type { Movie } from "../type/movie";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 

@@ -1,25 +1,36 @@
-// src/services/api.ts
 import axios from "axios";
-import { Movie } from "../types/Movie";
+import type { Movie } from "../type/movie";
 
-const API_KEY = import.meta.env.VITE_API_KEY;
+
+const API_KEY = "41f7444b493cd0bf121d832bb9cab315"; 
 const BASE_URL = "https://api.themoviedb.org/3";
 
 export const getPopularMovies = async (): Promise<Movie[]> => {
-  const res = await axios.get(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
-  return res.data.results;
+  try {
+    const res = await axios.get(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
+    return res.data.results;
+  } catch (error) {
+    console.error("Error fetching popular movies:", error);
+    throw error;
+  }
 };
 
 export const searchMovies = async (query: string): Promise<Movie[]> => {
-  const res = await axios.get(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`
-  );
-  return res.data.results;
+  try {
+    const res = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`);
+    return res.data.results;
+  } catch (error) {
+    console.error("Error searching movies:", error);
+    throw error;
+  }
 };
 
 export const getMovieDetails = async (id: string): Promise<Movie> => {
-  const res = await axios.get(
-    `${BASE_URL}/movie/${id}?api_key=${API_KEY}`
-  );
-  return res.data;
+  try {
+    const res = await axios.get(`${BASE_URL}/movie/${id}?api_key=${API_KEY}`);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    throw error;
+  }
 };
