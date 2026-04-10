@@ -1,4 +1,4 @@
-// src/pages/MovieDetail.tsx
+
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getMovieDetails } from "../services/api";
@@ -41,10 +41,10 @@ export default function MovieDetail() {
       transition={{ duration: 0.3 }}
       style={{ padding: "20px" }}
     >
-      {/* Back Button */}
+     
       <button onClick={() => navigate(-1)}>⬅ Back</button>
 
-      {/* Movie Content */}
+      
       <h1>{movie.title}</h1>
 
       <img
