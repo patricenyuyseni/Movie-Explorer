@@ -1,63 +1,42 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getMovieDetails } from "../services/api";
 import type { Movie } from "../type/movie";
 import { motion } from "framer-motion";
-import Loader from "../components/Loader";
 
 export default function MovieDetail() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const navigate = useNavigate();
-
   const [movie, setMovie] = useState<Movie | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchMovie = async () => {
-      if (!id) return;
-
-      try {
-        const data = await getMovieDetails(id);
-        setMovie(data);
-      } catch (error) {
-        console.error("Error fetching movie:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMovie();
+    if (id) getMovieDetails(id).then(setMovie);
   }, [id]);
 
-  if (loading) return <Loader />;
-  if (!movie) return <p>Movie not found</p>;
+  if (!movie) return <p className="text-center mt-10">Loading...</p>;
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      style={{ padding: "20px" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="w-[90%] max-w-[1100px] mx-auto pt-10 text-white"
     >
-     
-      <button onClick={() => navigate(-1)}>⬅ Back</button>
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-6 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition"
+      >
+        Back
+      </button>
 
-      
-      <h1>{movie.title}</h1>
+      <h1 className="text-4xl font-bold mb-6">{movie.title}</h1>
 
       <img
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        alt={movie.title}
-        style={{ width: "300px", borderRadius: "10px" }}
+        className="w-[320px] rounded-xl shadow-lg mb-6"
       />
 
-      <p><strong>⭐ Rating:</strong> {movie.vote_average}</p>
-      <p><strong>📅 Release Date:</strong> {movie.release_date}</p>
-
-      <p style={{ maxWidth: "600px" }}>
-        <strong>Overview:</strong> {movie.overview}
+      <p className="text-gray-300 leading-7 max-w-[700px]">
+        {movie.overview}
       </p>
     </motion.div>
   );

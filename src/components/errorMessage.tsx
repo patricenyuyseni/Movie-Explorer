@@ -1,5 +1,3 @@
-// src/components/common/ErrorMessage.tsx
-
 interface Props {
   message?: string;
 }
@@ -8,18 +6,9 @@ export default function ErrorMessage({
   message = "Something went wrong. Please try again.",
 }: Props) {
   return (
-    <div
-      style={{
-        padding: "20px",
-        margin: "20px 0",
-        backgroundColor: "#ffe6e6",
-        color: "#cc0000",
-        borderRadius: "8px",
-        textAlign: "center",
-      }}
-    >
-      <h3>⚠️ Error</h3>
-      <p>{message}</p>
+    <div className="my-6 rounded-lg border border-red-500/30 bg-red-500/10 p-6 text-center">
+      <h3 className="text-red-400 text-lg font-semibold mb-2">⚠️ Error</h3>
+      <p className="text-red-300">{message}</p>
     </div>
   );
 }

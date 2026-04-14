@@ -1,4 +1,4 @@
-// src/pages/Home.tsx
+
 
 import { useEffect, useState } from "react";
 import { getPopularMovies, searchMovies } from "../services/api";
@@ -27,7 +27,6 @@ export default function Home() {
           ? await searchMovies(query)
           : await getPopularMovies();
 
-      
         if (year) {
           data = data.filter((movie) =>
             movie.release_date?.startsWith(year)
@@ -47,21 +46,18 @@ export default function Home() {
   }, [query, year]);
 
   return (
-    <div style={{ padding: "20px" }}>
-      
-      <SearchBar query={query} setQuery={setQuery} />
+    <div className="min-h-screen bg-[#0b0f19] text-white">
+      <div className="w-[90%] max-w-[1300px] mx-auto pt-8">
 
-   
-      <FilterBar year={year} setYear={setYear} />
+        <div className="flex gap-4 mb-8">
+          <SearchBar query={query} setQuery={setQuery} />
+          <FilterBar year={year} setYear={setYear} />
+        </div>
 
-     
-      {loading && <Loader />}
-
-      
-      {error && <ErrorMessage />}
-
-     
-      {!loading && !error && <MovieGrid movies={movies} />}
+        {loading && <Loader />}
+        {error && <ErrorMessage />}
+        {!loading && !error && <MovieGrid movies={movies} />}
+      </div>
     </div>
   );
 }

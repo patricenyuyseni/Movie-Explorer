@@ -1,4 +1,4 @@
-// src/context/WatchlistContext.tsx
+
 import { createContext, useState, useEffect } from "react";
 import type { Movie } from "../type/movie";
 
