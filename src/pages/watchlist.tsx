@@ -1,4 +1,4 @@
-// src/pages/Watchlist.tsx
+
 
 import { useContext } from "react";
 import { WatchlistContext } from "../context/watchlistcontext";

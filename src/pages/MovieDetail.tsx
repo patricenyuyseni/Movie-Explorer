@@ -14,10 +14,10 @@ export default function MovieDetail() {
   useEffect(() => {
     if (!id) return;
 
-    // Fetch movie details
+    
     getMovieDetails(id).then(setMovie);
 
-    // Fetch trailer
+    
     getMovieTrailer(id).then((videos) => {
       const trailer = videos.find(
         (v: any) => v.type === "Trailer" && v.site === "YouTube"
@@ -41,7 +41,7 @@ export default function MovieDetail() {
       animate={{ opacity: 1 }}
       className="w-[90%] max-w-[1100px] mx-auto pt-10 text-white"
     >
-      {/* Back Button */}
+     
       <button
         onClick={() => navigate(-1)}
         className="mb-6 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition"
@@ -49,10 +49,10 @@ export default function MovieDetail() {
         Back
       </button>
 
-      {/* Title */}
+      
       <h1 className="text-4xl font-bold mb-6">{movie.title}</h1>
 
-      {/* Trailer */}
+     
       {trailerKey ? (
         <iframe
           className="w-full h-[450px] rounded-xl mb-6"
@@ -66,7 +66,7 @@ export default function MovieDetail() {
         </p>
       )}
 
-      {/* Poster + Info */}
+     
       <div className="flex flex-col md:flex-row gap-8">
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
