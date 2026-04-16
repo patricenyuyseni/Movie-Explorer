@@ -5,34 +5,52 @@ const API_KEY = "41f7444b493cd0bf121d832bb9cab315";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 /* =========================
-   GET POPULAR MOVIES
+   GET POPULAR MOVIES (PAGE SUPPORT)
 ========================= */
-export const getPopularMovies = async (): Promise<Movie[]> => {
+export const getPopularMovies = async (page = 1): Promise<Movie[]> => {
   try {
     const res = await axios.get(
-      `${BASE_URL}/movie/popular?api_key=${API_KEY}`
+      `${BASE_URL}/movie/popular`,
+      {
+        params: {
+          api_key: API_KEY,
+          page,
+        },
+      }
     );
+
     return res.data.results;
   } catch (error) {
     console.error("Error fetching popular movies:", error);
-    throw error;
+    return [];
   }
 };
 
 /* =========================
-   SEARCH MOVIES
+   SEARCH MOVIES (PAGE SUPPORT)
 ========================= */
 export const searchMovies = async (
-  query: string
+  query: string,
+  page = 1
 ): Promise<Movie[]> => {
   try {
+    if (!query.trim()) return [];
+
     const res = await axios.get(
-      `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`
+      `${BASE_URL}/search/movie`,
+      {
+        params: {
+          api_key: API_KEY,
+          query,
+          page,
+        },
+      }
     );
+
     return res.data.results;
   } catch (error) {
     console.error("Error searching movies:", error);
-    throw error;
+    return [];
   }
 };
 
@@ -42,8 +60,14 @@ export const searchMovies = async (
 export const getMovieDetails = async (id: string): Promise<Movie> => {
   try {
     const res = await axios.get(
-      `${BASE_URL}/movie/${id}?api_key=${API_KEY}`
+      `${BASE_URL}/movie/${id}`,
+      {
+        params: {
+          api_key: API_KEY,
+        },
+      }
     );
+
     return res.data;
   } catch (error) {
     console.error("Error fetching movie details:", error);
@@ -57,12 +81,44 @@ export const getMovieDetails = async (id: string): Promise<Movie> => {
 export const getMovieTrailer = async (id: string) => {
   try {
     const res = await axios.get(
-      `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}`
+      `${BASE_URL}/movie/${id}/videos`,
+      {
+        params: {
+          api_key: API_KEY,
+        },
+      }
     );
 
     return res.data.results;
   } catch (error) {
     console.error("Error fetching movie trailer:", error);
-    throw error;
+    return [];
+  }
+};
+
+/* =========================
+   🎯 FILTER BY YEAR (WITH PAGE SUPPORT)
+========================= */
+export const getMoviesByYear = async (
+  year: string,
+  page = 1
+): Promise<Movie[]> => {
+  try {
+    const res = await axios.get(
+      `${BASE_URL}/discover/movie`,
+      {
+        params: {
+          api_key: API_KEY,
+          primary_release_year: year,
+          sort_by: "popularity.desc",
+          page,
+        },
+      }
+    );
+
+    return res.data.results;
+  } catch (error) {
+    console.error("Error fetching movies by year:", error);
+    return [];
   }
 };
