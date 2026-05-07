@@ -14,6 +14,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
         <Route path="/watchlist" element={<Watchlist />} />
+       
       </Routes>
 
       <Footer />
