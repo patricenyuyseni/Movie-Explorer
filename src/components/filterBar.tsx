@@ -19,4 +19,4 @@ export default function FilterBar({ year, setYear }: Props) {
       <option value="2026">2026</option>
     </select>
   );
-}
+}// terminal test
